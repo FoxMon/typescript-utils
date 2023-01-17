@@ -11,3 +11,6 @@ export type Fn<T = void> = () => T;
 
 // Array or not yet
 export type Arrayable<T> = T | Array<T>;
+
+// Infers the element type of an array
+export type ElementOf<T> = T extends (infer E)[] ? E : never;
