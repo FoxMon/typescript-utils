@@ -1,3 +1,5 @@
+import { toString } from "./base";
+
 export function isArray(target: unknown): boolean {
   return Array.isArray(target);
 }
@@ -25,3 +27,6 @@ export function isString(target: unknown): boolean {
 export function isObject(target: unknown): boolean {
   return Object.prototype.toString.call(target) === "[object Object]";
 }
+
+export const isWindow = (val: any): boolean =>
+  typeof window !== "undefined" && toString(val) === "[object Window]";
