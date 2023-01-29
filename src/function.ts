@@ -12,6 +12,20 @@ function matched<X>(x: X) {
   };
 }
 
+/**
+ * 
+ * example
+ match(0)
+  .on(
+    (x) => x < 0,
+    () => 0
+  )
+  .on(
+    (x) => x >= 0 && x < 1,
+    () => 1
+  )
+  .otherwise((x) => x * 10);
+ */
 export function match<X, Y>(x: X): MatchType<X, Y> {
   return {
     on: (pred: (x: X) => boolean, fn: (x: X) => Y) =>
