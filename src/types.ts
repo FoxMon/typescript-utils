@@ -14,3 +14,8 @@ export type Arrayable<T> = T | Array<T>;
 
 // Infers the element type of an array
 export type ElementOf<T> = T extends (infer E)[] ? E : never;
+
+export interface MatchType<X, Y> {
+  on: (pred: (x: X) => boolean, fn: (x: X) => Y) => MatchType<X, Y>;
+  otherwise: (fn: (x: X) => Y) => Y;
+}
