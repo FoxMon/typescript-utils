@@ -5,7 +5,7 @@ export function callEvery(functions: Array<Nullable<Fn>>): void {
   functions.forEach((fn) => fn && fn());
 }
 
-function matched<X>(x: X) {
+export function matched<X>(x: X) {
   return {
     on: () => matched(x),
     otherwise: () => x,
