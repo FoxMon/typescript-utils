@@ -33,3 +33,15 @@ export function match<X, Y>(x: X): MatchType<X, Y> {
     otherwise: (fn: (x: X) => Y) => fn(x),
   };
 }
+
+export async function asyncEach<T>(
+  items: Array<T>,
+  cb: (item: T) => Promise<any>
+): Promise<void> {
+  const totalIndexes: Array<number> = Array.from({ length: items.length })
+    .fill(0)
+    .map((_, idx: number) => idx);
+  for (const idx of totalIndexes) {
+    await cb(items[idx]);
+  }
+}
