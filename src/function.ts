@@ -45,3 +45,15 @@ export async function asyncEach<T>(
     await cb(items[idx]);
   }
 }
+
+export async function asyncMap<T>(
+  items: Array<T>,
+  cb: (item: T) => Promise<T>
+) {
+  const rtnAsyncArray: Array<T> = [];
+  await asyncEach(items, async (item) => {
+    const res: T = await cb(item);
+    rtnAsyncArray.push(res);
+  });
+  return rtnAsyncArray;
+}
