@@ -57,3 +57,15 @@ export async function asyncMap<T>(
   });
   return rtnAsyncArray;
 }
+
+export async function asyncFilter<T>(
+  items: Array<T>,
+  cb: (item: T) => Promise<boolean>
+) {
+  const rtnAsyncArray: Array<T> = [];
+  await asyncEach(items, async (item) => {
+    const condition: boolean = await cb(item);
+    condition && rtnAsyncArray.push(item);
+  });
+  return rtnAsyncArray;
+}
