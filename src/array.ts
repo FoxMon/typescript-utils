@@ -9,3 +9,13 @@ export const mergeArray = <T>(arr1: Array<T>, arr2: Array<T>): Array<T> => {
   const mergedArray: Array<T> = [...arr1, ...arr2];
   return mergedArray;
 };
+
+export const remove = <T>(arr: Array<T>, value: T): boolean => {
+  if (!arr) return false;
+  const idx: number = arr.indexOf(value);
+  if (idx >= 0) {
+    arr.splice(idx, 1);
+    return true;
+  }
+  return false;
+};
