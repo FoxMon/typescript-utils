@@ -19,3 +19,7 @@ export const remove = <T>(arr: Array<T>, value: T): boolean => {
   }
   return false;
 };
+
+export const removeDuplicate = <T>(arr: Array<T>): Array<T> => {
+  return arr.filter((value: T, idx: number) => arr.indexOf(value) === idx);
+};
