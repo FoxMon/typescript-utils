@@ -69,3 +69,13 @@ export async function asyncFilter<T>(
   });
   return rtnAsyncArray;
 }
+
+export function memoize<T, V>(func: (input: T) => V) {
+  const cache = new Map<T, V>();
+  return function (input: T): V {
+    if (cache.has(input)) return cache.get(input)!;
+    const result = func(input);
+    cache.set(input, result);
+    return result;
+  };
+}
