@@ -1,4 +1,4 @@
-import type { Fn, MatchType, Nullable } from "./types";
+import type { Fn, Func, MatchType, Nullable } from "./types";
 
 // Call every function in an array
 export function callEvery(functions: Array<Nullable<Fn>>): void {
@@ -78,4 +78,14 @@ export function memoize<T, V>(func: (input: T) => V) {
     cache.set(input, result);
     return result;
   };
+}
+
+export function curry(fn: Func, arity = fn.length, ...args: any[]): any {
+  arity <= args.length ? fn(...args) : curry.bind(null, fn, arity, ...args);
+}
+
+export function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K> {
+  const result: any = {};
+  keys.forEach((key: K) => (result[key] = obj[key]));
+  return result;
 }
