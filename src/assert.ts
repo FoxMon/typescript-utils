@@ -19,3 +19,11 @@ export function assertIsNumber(value: unknown): asserts value is number {
     throw new AssertionError("Not a number!");
   }
 }
+
+export function assertIsDefined<T>(value: T): asserts value is NonNullable<T> {
+  if (value === null || value === undefined) {
+    throw new AssertionError(
+      `Expected value to be defined, but received ${value}`
+    );
+  }
+}
