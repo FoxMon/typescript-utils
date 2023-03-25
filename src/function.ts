@@ -108,3 +108,27 @@ export function size(value: any): number {
     ? new Blob([value]).size
     : 0;
 }
+
+export function throttle(func: Function, wait: number = 250) {
+  let isThrottle: boolean;
+  let lastFunc: ReturnType<typeof setTimeout>;
+  let lastTime: number;
+  return function (this: any) {
+    const ctx = this;
+    const args = arguments;
+    if (!isThrottle) {
+      func.apply(ctx, args);
+      lastTime = Date.now();
+      isThrottle = true;
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(() => {
+        const nowTime = Date.now();
+        if (nowTime - lastTime >= wait) {
+          func.apply(ctx, args);
+          lastTime = Date.now();
+        }
+      }, Math.max(wait - (Date.now() - lastTime), 0));
+    }
+  };
+}
