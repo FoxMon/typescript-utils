@@ -27,3 +27,13 @@ export function assertIsDefined<T>(value: T): asserts value is NonNullable<T> {
     );
   }
 }
+
+export function size(value: any): number {
+  return Array.isArray(value)
+    ? value.length
+    : value && typeof value === "object"
+    ? value.size || value.length || Object.keys(value).length
+    : typeof value === "string"
+    ? new Blob([value]).size
+    : 0;
+}
