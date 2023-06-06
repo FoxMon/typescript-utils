@@ -27,3 +27,11 @@ export function assertIsDefined<T>(value: T): asserts value is NonNullable<T> {
     );
   }
 }
+
+export function assertFunction(value: unknown): asserts value is Function {
+  if (typeof value !== "function") {
+    throw new AssertionError(
+      `Expected value is function, but received ${value}`
+    );
+  }
+}
