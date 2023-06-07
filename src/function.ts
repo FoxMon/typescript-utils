@@ -109,6 +109,14 @@ export function size(value: any): number {
     : 0;
 }
 
+export function pipe(...funcs: Array<Function>): Function {
+  return function (v: any) {
+    return funcs.reduce((res, func) => {
+      return func(res);
+    }, v);
+  };
+}
+
 export function throttle(func: Function, wait: number = 250) {
   let isThrottle: boolean;
   let lastFunc: ReturnType<typeof setTimeout>;
